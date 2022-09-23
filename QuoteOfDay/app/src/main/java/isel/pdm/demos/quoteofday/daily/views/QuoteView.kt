@@ -1,5 +1,6 @@
-package isel.pdm.demos.quoteofday.main.views
+package isel.pdm.demos.quoteofday.daily.views
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,11 +12,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import isel.pdm.demos.quoteofday.main.Quote
+import isel.pdm.demos.quoteofday.daily.Quote
+import isel.pdm.demos.quoteofday.daily.TAG
 import isel.pdm.demos.quoteofday.ui.theme.QuoteOfDayTheme
 
 @Composable
 fun QuoteView(quote: Quote) {
+    Log.v(TAG, "QuoteView composing ")
     Column(modifier = Modifier
         .padding(64.dp)
         .testTag("QuoteView")) {
