@@ -15,7 +15,6 @@ For reference:
 * [Android API Levels](https://apilevels.com/)
 * [SDK Platform release notes | Android Developers](https://developer.android.com/studio/releases/platforms)
 
-Lecture video (in Portuguese) (_coming soon_)
 
 ### 16/09/2022 - Execution in Android: introduction
 
@@ -32,7 +31,7 @@ For reference:
 * [Threading model](https://developer.android.com/guide/components/processes-and-threads#Threads)
 * [The Kotlin programming language](https://kotlinlang.org/docs/reference/)
 
-Lecture video (in Portuguese) (_coming soon_)
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=bD973D732-M&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=1)
 
 ## Week 2
 ### 19/09/2022 - Building a UI with Jetpack Compose: introduction
@@ -56,7 +55,7 @@ For reference:
 Other links:
 * [Compose library elements and versions](https://developer.android.com/jetpack/androidx/releases/compose)
 
-Lecture video (in Portuguese) (_coming soon_)
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=Fj_tPTNSIBU&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=2)
 
 ### 23/09/2022 - Building a UI with Jetpack Compose: continued
 * @Composable functions, continued: State → @Composable → UI
@@ -70,5 +69,36 @@ Lecture video (in Portuguese) (_coming soon_)
 For reference:
 * [Thinking in Compose | Jetpack Compose | Android Developers](https://developer.android.com/jetpack/compose/mental-model)
 * [State and Jetpack Compose](https://developer.android.com/jetpack/compose/state)
+
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=SlJKcNfatQI&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=3)
+
+## Week 3
+### 26/09/2022 - State managment: presentation state _(preview)_
+* [ViewModel: purpose and motivation](https://developer.android.com/topic/libraries/architecture/viewmodel)
+  * [Lifecycle](https://developer.android.com/topic/libraries/architecture/viewmodel#lifecycle)
+  * Preserving state across configuration changes using a view model
+  * The view model as an alternative execution host
+* [Android Application class](https://developer.android.com/reference/android/app/Application)
+  * Motivation and lifecycle 
+  * Using Application for [manual dependency injection](https://developer.android.com/training/dependency-injection/manual#basics-manual-di)
+* [Automated tests in Android: introduction](https://developer.android.com/training/testing)
+  * Local tests
+  * [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests)
+    * [Automated UI tests](https://developer.android.com/training/testing/instrumented-tests/ui-tests)
+    * [Testing layouts in Jetpack Compose](https://developer.android.com/jetpack/compose/testing)
+* Demo:
+  * Lets fix the Quote Of Day demo (still with a fake service)
+
+Lecture video (in Portuguese) (_coming soon_)
+
+### 30/09/2022 - Building a UI: navigation
+* Navigation between Activities
+  * [Intents (explicit and implicit) and intent filters](https://developer.android.com/guide/components/intents-filters)
+  * [User task and back stack](https://developer.android.com/guide/components/activities/tasks-and-back-stack)
+* Demo:
+  * Adding a credits screen to the Quote Of Day demo (still with a fake service)
+
+* Other links:
+  * [Using material components and layouts](https://developer.android.com/jetpack/compose/layouts/material)
 
 Lecture video (in Portuguese) (_coming soon_)
