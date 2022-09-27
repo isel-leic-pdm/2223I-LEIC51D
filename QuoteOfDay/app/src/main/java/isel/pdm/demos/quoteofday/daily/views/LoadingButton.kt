@@ -5,10 +5,11 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import isel.pdm.demos.quoteofday.R
-import isel.pdm.demos.quoteofday.daily.TAG
+import isel.pdm.demos.quoteofday.TAG
 import isel.pdm.demos.quoteofday.ui.theme.QuoteOfDayTheme
 
 
@@ -24,7 +25,7 @@ fun LoadingButton(
     Button(
         onClick = onClick,
         enabled = state == LoadingState.Idle,
-        modifier = modifier
+        modifier = modifier.testTag("LoadingButton")
     ) {
         val buttonTextId =
             if (state == LoadingState.Idle) R.string.fetch_quote_button_text

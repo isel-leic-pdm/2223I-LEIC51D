@@ -1,52 +1,27 @@
 package isel.pdm.demos.quoteofday.daily
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.activity.viewModels
+import isel.pdm.demos.quoteofday.DependenciesContainer
 import isel.pdm.demos.quoteofday.daily.views.LoadingState
-import isel.pdm.demos.quoteofday.utils.loggableMutableStateOf
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-const val TAG = "QuoteOfDayApp"
+class DailyQuoteActivity : ComponentActivity() {
 
-class MainActivity : ComponentActivity() {
+    private val vm by viewModels<DailyQuoteViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val service = FakeQuoteOfDayService()
+        val service = (application as DependenciesContainer).quoteService
         setContent {
-            val loadingState = remember {
-                Log.v(TAG, "Inside remember loadingState")
-                loggableMutableStateOf(
-                    at = "root.loadingState",
-                    value = LoadingState.Idle
-                )
-            }
-            val scope = rememberCoroutineScope()
-            val quote = remember {
-                Log.v(TAG, "Inside remember quote")
-                loggableMutableStateOf<Quote?>(
-                    at = "root.quote",
-                    value = null
-                )
-            }
+            val loadingState =
+                if (vm.isLoading.value) LoadingState.Loading
+                else LoadingState.Idle
             QuoteOfDayScreen(
-                quote = quote.value,
-                onUpdateRequested = {
-                    scope.launch {
-                        Log.v(TAG, "onUpdateRequested()")
-                        loadingState.value = LoadingState.Loading
-                        quote.value = service.getTodayQuote()
-                        loadingState.value = LoadingState.Idle
-                        Log.v(TAG, "onUpdateRequested() ends")
-                    }
-                },
-                loadingState = loadingState.value
+                quote = vm.quote.value,
+                onUpdateRequested = { vm.fetchQuote(service) },
+                loadingState = loadingState
             )
         }
     }

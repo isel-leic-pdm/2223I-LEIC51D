@@ -42,7 +42,10 @@ fun QuoteOfDayScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     LoadingButton(
-                        onClick = { onUpdateRequested() },
+                        onClick = {
+                            Log.v(TAG, "onUpdateRequested()")
+                            onUpdateRequested()
+                        },
                         state = loadingState,
                         modifier = Modifier.padding(all = 16.dp)
                     )
