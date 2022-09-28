@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import isel.pdm.demos.quoteofday.TAG
 import isel.pdm.demos.quoteofday.daily.views.LoadingButton
 import isel.pdm.demos.quoteofday.daily.views.LoadingState
 import isel.pdm.demos.quoteofday.daily.views.QuoteView

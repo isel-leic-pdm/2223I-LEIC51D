@@ -1,6 +1,5 @@
 package isel.pdm.demos.quoteofday
 
-import android.util.Log
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -33,8 +32,6 @@ class QuoteActivityTests {
         // Arrange
         quoteActivityRule.onNodeWithTag("QuoteView").assertDoesNotExist()
         quoteActivityRule.onNodeWithTag("LoadingButton").performClick()
-
-        Thread.sleep(FAKE_FETCH_DELAY * 2)
         quoteActivityRule.onNodeWithTag("QuoteView").assertExists()
 
         // Act

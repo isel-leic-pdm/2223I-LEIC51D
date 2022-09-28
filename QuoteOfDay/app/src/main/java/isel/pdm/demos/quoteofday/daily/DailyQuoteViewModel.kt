@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import isel.pdm.demos.quoteofday.TAG
 import isel.pdm.demos.quoteofday.utils.loggableMutableStateOf
 import kotlinx.coroutines.launch
 
