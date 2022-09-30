@@ -32,6 +32,7 @@ class QuoteActivityTests {
         // Arrange
         quoteActivityRule.onNodeWithTag("QuoteView").assertDoesNotExist()
         quoteActivityRule.onNodeWithTag("LoadingButton").performClick()
+        quoteActivityRule.waitForIdle()
         quoteActivityRule.onNodeWithTag("QuoteView").assertExists()
 
         // Act
