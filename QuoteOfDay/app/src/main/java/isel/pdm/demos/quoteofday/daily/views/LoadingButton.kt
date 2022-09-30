@@ -28,8 +28,8 @@ fun LoadingButton(
         modifier = modifier.testTag("LoadingButton")
     ) {
         val buttonTextId =
-            if (state == LoadingState.Idle) R.string.fetch_quote_button_text
-            else R.string.fetch_quote_button_text_loading
+            if (state == LoadingState.Idle) R.string.activity_quote_fetch_button_text_idle
+            else R.string.activity_quote_fetch_button_text_loading
         Text(text = stringResource(id = buttonTextId))
     }
 }

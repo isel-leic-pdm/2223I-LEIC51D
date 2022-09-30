@@ -1,11 +1,13 @@
 package isel.pdm.demos.quoteofday.daily
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import isel.pdm.demos.quoteofday.DependenciesContainer
 import isel.pdm.demos.quoteofday.daily.views.LoadingState
+import isel.pdm.demos.quoteofday.info.InfoActivity
 
 class DailyQuoteActivity : ComponentActivity() {
 
@@ -20,9 +22,15 @@ class DailyQuoteActivity : ComponentActivity() {
                 else LoadingState.Idle
             QuoteOfDayScreen(
                 quote = vm.quote.value,
-                onUpdateRequested = { vm.fetchQuote(service) },
+                onUpdateRequest = { vm.fetchQuote(service) },
+                onInfoRequest = { navigateToInfoScreen() },
                 loadingState = loadingState
             )
         }
+    }
+
+    private fun navigateToInfoScreen() {
+        val intent = Intent(this, InfoActivity::class.java)
+        startActivity(intent)
     }
 }
