@@ -8,7 +8,9 @@ import isel.pdm.demos.quoteofday.TAG
 import isel.pdm.demos.quoteofday.utils.loggableMutableStateOf
 import kotlinx.coroutines.launch
 
-class DailyQuoteViewModel : ViewModel() {
+class DailyQuoteViewModel(
+    private val quoteService: QuoteOfDayService
+) : ViewModel() {
 
     private val _isLoading = loggableMutableStateOf(
         at = "DailyQuoteViewModel.isLoading",
@@ -24,11 +26,11 @@ class DailyQuoteViewModel : ViewModel() {
     val quote: State<Quote?>
         get() = _quote
 
-    fun fetchQuote(service: QuoteOfDayService) {
+    fun fetchQuote() {
         viewModelScope.launch {
             Log.v(TAG, "fetchQuote() coroutine starts")
             _isLoading.value = true
-            _quote.value = service.getTodayQuote()
+            _quote.value = quoteService.getTodayQuote()
             _isLoading.value = false
             Log.v(TAG, "fetchQuote() coroutine ends")
         }
