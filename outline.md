@@ -103,4 +103,7 @@ For reference:
 * Other links:
   * [Using material components and layouts](https://developer.android.com/jetpack/compose/layouts/material)
   
-Lecture video (in Portuguese) (_coming soon_)
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=hX_rRZfM2yM&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=5)
+
+## Week 4
+* Practical classes dedicated to the development of the course's project
