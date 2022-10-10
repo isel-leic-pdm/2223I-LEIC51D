@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import isel.pdm.demos.quoteofday.TAG
 import isel.pdm.demos.quoteofday.utils.loggableMutableStateOf
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class DailyQuoteViewModel(
     private val quoteService: QuoteOfDayService
@@ -29,9 +30,14 @@ class DailyQuoteViewModel(
     fun fetchQuote() {
         viewModelScope.launch {
             Log.v(TAG, "fetchQuote() coroutine starts")
-            _isLoading.value = true
-            _quote.value = quoteService.getTodayQuote()
-            _isLoading.value = false
+            try {
+                _isLoading.value = true
+                _quote.value = quoteService.getTodayQuote()
+                _isLoading.value = false
+            }
+            catch (ioe: IOException) {
+                TODO("Notify user about network connectivity failure")
+            }
             Log.v(TAG, "fetchQuote() coroutine ends")
         }
     }
