@@ -22,14 +22,14 @@ import palbp.laboratory.demos.quoteofday.ui.RefreshingState
 import palbp.laboratory.demos.quoteofday.ui.TopBar
 import palbp.laboratory.demos.quoteofday.ui.theme.QuoteOfDayTheme
 
-data class QuoteOfDayScreenState(
+data class QuoteScreenState(
     val quote: Quote? = null,
     val loadingState: RefreshingState = RefreshingState.Idle
 )
 
 @Composable
-fun QuoteOfDayScreen(
-    state: QuoteOfDayScreenState = QuoteOfDayScreenState(),
+fun QuoteScreen(
+    state: QuoteScreenState = QuoteScreenState(),
     onUpdateRequest: (() -> Unit)? = null,
     onInfoRequest: (() -> Unit)? = null,
     onHistoryRequested: (() -> Unit)? = null
@@ -79,5 +79,5 @@ private val loremIpsumQuote = Quote(
 @Preview(showBackground = true)
 @Composable
 private fun QuoteOfDayScreenPreview() {
-    QuoteOfDayScreen(QuoteOfDayScreenState(quote = loremIpsumQuote))
+    QuoteScreen(QuoteScreenState(quote = loremIpsumQuote))
 }

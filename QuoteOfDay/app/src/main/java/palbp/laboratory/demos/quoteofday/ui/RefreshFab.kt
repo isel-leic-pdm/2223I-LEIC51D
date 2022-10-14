@@ -107,3 +107,5 @@ private fun IdleRefreshFabPreview() {
 private fun RefreshingRefreshFabPreview() {
     RefreshFab(onClick = { }, state = RefreshingState.Refreshing)
 }
+
+// TODO: Add preview for interactive use

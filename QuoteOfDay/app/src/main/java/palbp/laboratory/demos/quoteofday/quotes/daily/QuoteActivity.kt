@@ -31,8 +31,8 @@ class QuoteActivity : ComponentActivity() {
                 if (viewModel.isLoading) RefreshingState.Refreshing
                 else RefreshingState.Idle
 
-            QuoteOfDayScreen(
-                state = QuoteOfDayScreenState(viewModel.quote, loadingState),
+            QuoteScreen(
+                state = QuoteScreenState(viewModel.quote, loadingState),
                 onUpdateRequest = {
                     Log.v(TAG, "QuoteActivity.onUpdateRequest()")
                     viewModel.fetchQuote()
