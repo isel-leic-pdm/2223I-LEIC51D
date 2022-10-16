@@ -2,15 +2,12 @@ package palbp.laboratory.demos.quoteofday.quotes
 
 import android.util.Log
 import com.google.gson.Gson
-import kotlinx.coroutines.delay
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import palbp.laboratory.demos.quoteofday.TAG
 import palbp.laboratory.demos.quoteofday.utils.hypermedia.SirenMediaType
-import java.io.IOException
+import palbp.laboratory.demos.quoteofday.utils.send
 import java.net.URL
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 interface QuoteService {
     suspend fun fetchQuote(): Quote
@@ -28,39 +25,28 @@ class RealQuoteService(
             .url(quoteHome)
             .build()
 
-        Log.v(TAG, "fetchQuote: before suspendCoroutine in Thread = ${Thread.currentThread().name}")
-        val quote = suspendCoroutine { continuation ->
-            httpClient.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.v(TAG, "fetchQuote: onFailure in Thread = ${Thread.currentThread().name}")
-                    continuation.resumeWithException(e)
-                }
+        Log.v(TAG, "fetchQuote: before request.send in Thread = ${Thread.currentThread().name}")
 
-                override fun onResponse(call: Call, response: Response) {
-                    Log.v(TAG, "fetchQuote: onResponse in Thread = ${Thread.currentThread().name}")
-                    val contentType = response.body?.contentType()
-                    if (response.isSuccessful && contentType != null && contentType == SirenMediaType) {
-                        val quoteDto = jsonEncoder.fromJson<QuoteDto>(
-                            response.body?.string(),
-                            QuoteDtoType.type
-                        )
-                        continuation.resume(Quote(quoteDto))
-                    }
-                    else {
-                        Log.e(TAG, "onResponse: got response status ${response.code} from API. Is the home URL correct?")
-                        TODO()
-                    }
-                }
-            })
+        val quoteDto = request.send(httpClient) { response ->
+            Log.v(TAG, "fetchQuote: inside response handler in Thread = ${Thread.currentThread().name}")
+            val contentType = response.body?.contentType()
+            if (response.isSuccessful && contentType != null && contentType == SirenMediaType) {
+                jsonEncoder.fromJson<QuoteDto>(
+                    response.body?.string(),
+                    QuoteDtoType.type
+                )
+            }
+            else {
+                Log.e(TAG, "fetchQuote: Got response status ${response.code} from API. Is the home URL correct?")
+                TODO()
+            }
         }
 
-        Log.v(TAG, "fetchQuote: after suspendCoroutine in Thread = ${Thread.currentThread().name}")
-        return quote
+        Log.v(TAG, "fetchQuote: after request.send in Thread = ${Thread.currentThread().name}")
+        return Quote(quoteDto)
     }
 
     override suspend fun fetchWeekQuotes(): List<Quote> {
-        // TODO
-        delay(3000)
-        return emptyList()
+        TODO()
     }
 }

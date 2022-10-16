@@ -32,7 +32,8 @@ fun QuoteScreen(
     state: QuoteScreenState = QuoteScreenState(),
     onUpdateRequest: (() -> Unit)? = null,
     onInfoRequest: (() -> Unit)? = null,
-    onHistoryRequested: (() -> Unit)? = null
+    onHistoryRequested: (() -> Unit)? = null,
+    onBackRequested: (() -> Unit)? = null
 ) {
     Log.i(TAG, "QuoteOfDayScreen: composing")
     QuoteOfDayTheme {
@@ -40,16 +41,19 @@ fun QuoteScreen(
             modifier = Modifier.fillMaxSize(),
             backgroundColor = MaterialTheme.colors.background,
             floatingActionButton = {
-                RefreshFab(
-                    onClick = onUpdateRequest ?: { },
-                    state = state.loadingState
-                )
+                if (onUpdateRequest != null) {
+                    RefreshFab(
+                        onClick = onUpdateRequest,
+                        state = state.loadingState
+                    )
+                }
             },
             floatingActionButtonPosition = FabPosition.Center,
             topBar = {
                 TopBar(
                     onInfoRequested = onInfoRequest,
-                    onHistoryRequested = onHistoryRequested
+                    onHistoryRequested = onHistoryRequested,
+                    onBackRequested = onBackRequested
                 )
             }
         ) { innerPadding ->
