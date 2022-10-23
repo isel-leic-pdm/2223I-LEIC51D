@@ -12,6 +12,7 @@ import palbp.laboratory.demos.quoteofday.info.InfoActivity
 import palbp.laboratory.demos.quoteofday.quotes.LocalQuoteDto
 import palbp.laboratory.demos.quoteofday.quotes.Quote
 import palbp.laboratory.demos.quoteofday.quotes.weekly.QuotesListActivity
+import palbp.laboratory.demos.quoteofday.ui.NavigationHandlers
 import palbp.laboratory.demos.quoteofday.ui.RefreshingState
 import palbp.laboratory.demos.quoteofday.utils.viewModelInit
 
@@ -23,7 +24,7 @@ import palbp.laboratory.demos.quoteofday.utils.viewModelInit
 class QuoteActivity : ComponentActivity() {
 
     companion object {
-        private const val QUOTE_EXTRA = "QUOTE_EXTRA"
+        const val QUOTE_EXTRA = "QUOTE_EXTRA"
         fun navigate(origin: Activity, quote: LocalQuoteDto? = null) {
             with(origin) {
                 val intent = Intent(this, QuoteActivity::class.java)
@@ -49,24 +50,32 @@ class QuoteActivity : ComponentActivity() {
             if (receivedExtra != null) {
                 QuoteScreen(
                     state = QuoteScreenState(Quote(receivedExtra), RefreshingState.Idle),
-                    onInfoRequest = { InfoActivity.navigate(origin = this) },
-                    onBackRequested = { finish() }
+                    onNavigationRequested = NavigationHandlers(
+                        onInfoRequested = { InfoActivity.navigate(origin = this) },
+                        onBackRequested = { finish() }
+                    )
                 )
             }
             else {
+                if (viewModel.quote == null)
+                    viewModel.fetchQuote()
+
                 val loadingState: RefreshingState =
                     if (viewModel.isLoading) RefreshingState.Refreshing
                     else RefreshingState.Idle
                 QuoteScreen(
                     state = QuoteScreenState(viewModel.quote, loadingState),
                     onUpdateRequest = { viewModel.fetchQuote() },
-                    onInfoRequest = { InfoActivity.navigate(origin = this) },
-                    onHistoryRequested = { QuotesListActivity.navigate(origin = this) }
+                    onNavigationRequested = NavigationHandlers(
+                        onInfoRequested = { InfoActivity.navigate(origin = this) },
+                        onHistoryRequested = { QuotesListActivity.navigate(origin = this) }
+                    )
                 )
             }
         }
     }
 
+    @Suppress("deprecation")
     private val quoteExtra: LocalQuoteDto?
         get() =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)

@@ -10,7 +10,7 @@ import palbp.laboratory.demos.quoteofday.DependenciesContainer
 import palbp.laboratory.demos.quoteofday.info.InfoActivity
 import palbp.laboratory.demos.quoteofday.quotes.daily.QuoteActivity
 import palbp.laboratory.demos.quoteofday.quotes.toLocalDto
-import palbp.laboratory.demos.quoteofday.quotes.weekly.QuotesListActivity.Companion.navigate
+import palbp.laboratory.demos.quoteofday.ui.NavigationHandlers
 import palbp.laboratory.demos.quoteofday.ui.RefreshingState
 import palbp.laboratory.demos.quoteofday.utils.viewModelInit
 
@@ -40,6 +40,9 @@ class QuotesListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            if (viewModel.quotes.isEmpty())
+                viewModel.fetchWeekQuotes()
+
             val loadingState =
                 if (viewModel.isLoading) RefreshingState.Refreshing
                 else RefreshingState.Idle
@@ -48,9 +51,11 @@ class QuotesListActivity : ComponentActivity() {
                 onQuoteSelected = {
                     QuoteActivity.navigate(origin = this, quote = it.toLocalDto())
                 },
-                onBackRequested = { finish() },
-                onInfoRequest = { InfoActivity.navigate(origin = this) },
-                onUpdateRequest = { viewModel.fetchWeekQuotes() }
+                onUpdateRequest = { viewModel.fetchWeekQuotes() },
+                onNavigationRequested = NavigationHandlers(
+                    onBackRequested = { finish() },
+                    onInfoRequested = { InfoActivity.navigate(origin = this) }
+                )
             )
         }
     }

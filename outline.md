@@ -132,7 +132,7 @@ Other links:
 
 [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=1OJY7O4M81Q&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=6)
 
-### 14/10/2022 - State management: continued _(preview)_
+### 14/10/2022 - State management: continued 
 * Navigation between activities, revisited
   * [Sending data between activities](https://developer.android.com/guide/components/activities/parcelables-and-bundles#sdba)
   * [Parcelable contract](https://developer.android.com/reference/android/os/Parcelable)
@@ -158,8 +158,28 @@ Other links:
 ### 17/10/2022
 * Part 1: Finishing up on last session's topics
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=sA7SluKv3xQ&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=8)
 
 * Part 2: Practical class dedicated to the course's project
 
-### 21/10/2022 - _TBD_
+## Week 7
+### 24/10/2022 _(preview)_
+* Considerations on the design of Android applications
+  * [Guide to app architecture](https://developer.android.com/topic/architecture)
+  * Materialization on the QuoteOfDay demo application
+* Resource managment 
+  * Rationalizing the use of the communications' network
+  * Leveraging HTTP caching
+  * [Caching support in OkHttp](https://square.github.io/okhttp/features/caching/)
+  * [Accessing application specific storage in Android](https://developer.android.com/training/data-storage/app-specific)
+* [Performing background work (i.e. non user facing)](https://developer.android.com/guide/background)
+  * Motivation
+  * Resource management in Android: [processes and application lifecycle](https://developer.android.com/guide/components/activities/process-lifecycle)
+* [Introduction to the Work Manager API](https://developer.android.com/topic/libraries/architecture/workmanager/)
+  * Purpose and motivation
+
+Other links:
+* [HTTP Caching - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching)
+* [HTTP Caching - RFC 9111](https://httpwg.org/specs/rfc9111.html)
+
+Lecture video (in Portuguese) _(coming soon)_
