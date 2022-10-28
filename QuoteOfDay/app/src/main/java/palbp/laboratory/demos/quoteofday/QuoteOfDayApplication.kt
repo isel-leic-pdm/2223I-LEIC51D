@@ -2,6 +2,7 @@ package palbp.laboratory.demos.quoteofday
 
 import android.app.Application
 import android.util.Log
+import androidx.work.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.delay
@@ -11,14 +12,15 @@ import palbp.laboratory.demos.quoteofday.quotes.*
 import palbp.laboratory.demos.quoteofday.utils.hypermedia.SubEntity
 import palbp.laboratory.demos.quoteofday.utils.hypermedia.SubEntityDeserializer
 import java.net.URL
+import java.util.concurrent.TimeUnit
 
-const val TAG = "QuoteOfDayDemo"
+const val TAG = "QuoteOfDayApp"
 
 interface DependenciesContainer {
     val quoteService: QuoteService
 }
 
-private val quoteAPIHome = URL("https://1bbd-2001-818-e22f-ee00-e13e-7fa1-2552-28a.ngrok.io")
+private val quoteAPIHome = URL("https://e51a-2001-818-e22f-ee00-d4a6-efd5-b697-50de.ngrok.io")
 
 class QuoteOfDayApplication : DependenciesContainer, Application() {
 
@@ -45,9 +47,28 @@ class QuoteOfDayApplication : DependenciesContainer, Application() {
         )
     }
 
+    private val workerConstraints  = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        //.setRequiresCharging(true)
+        .build()
+
     override fun onCreate() {
         super.onCreate()
         Log.v(TAG, "QuoteOfDayApplication.onCreate() on process ${android.os.Process.myPid()}")
+
+        val workRequest =
+            PeriodicWorkRequestBuilder<QuotesWorker>(repeatInterval = 15, TimeUnit.MINUTES)
+                .setConstraints(workerConstraints)
+                .setInitialDelay(2, TimeUnit.MINUTES)
+                .build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "QuotesWorker",
+            ExistingPeriodicWorkPolicy.KEEP,
+            workRequest
+        )
+
+        Log.v(TAG, "QuotesWorker was scheduled")
     }
 }
 
@@ -62,12 +83,12 @@ private class FakeQuoteService : QuoteService {
         author = "Fernando Pessoa"
     )
 
-    override suspend fun fetchQuote(): Quote {
+    override suspend fun fetchQuote(mode: QuoteService.Mode): Quote {
         delay(3000)
         return aQuote
     }
 
-    override suspend fun fetchWeekQuotes(): List<Quote> {
+    override suspend fun fetchWeekQuotes(mode: QuoteService.Mode): List<Quote> {
         delay(3000)
         return buildList { repeat(20) { add(aQuote) } }
     }

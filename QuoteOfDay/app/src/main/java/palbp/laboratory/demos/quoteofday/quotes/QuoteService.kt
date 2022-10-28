@@ -2,6 +2,7 @@ package palbp.laboratory.demos.quoteofday.quotes
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
+import okhttp3.CacheControl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -18,14 +19,29 @@ import java.net.URL
 interface QuoteService {
 
     /**
-     * Gets the daily quote
+     * Used to identify how implementations SHOULD behave:
+     * - [FORCE_REMOTE] is used to indicate that the operation MUST try to access
+     * the remote data source
+     * - [FORCE_LOCAL] is usd to indicate that the operation SHOULD only use the
+     * the local version of the data, if available
+     * - [AUTO] states that the selection of which data to use is left to the
+     * implementation.
      */
-    suspend fun fetchQuote(): Quote
+    enum class Mode { FORCE_REMOTE, FORCE_LOCAL, AUTO }
+
+    /**
+     * Gets the daily quote
+     * @param mode how the operation should behave. @see [Mode]
+     * @return the quote for the day
+     */
+    suspend fun fetchQuote(mode: Mode = Mode.AUTO): Quote
 
     /**
      * Gets the week's quotes
+     * @param mode how the operation should behave. @see [Mode]
+     * @return the week's quotes
      */
-    suspend fun fetchWeekQuotes(): List<Quote>
+    suspend fun fetchWeekQuotes(mode: Mode = Mode.AUTO): List<Quote>
 }
 
 /**
@@ -40,10 +56,8 @@ class RealQuoteService(
     private val jsonEncoder: Gson
 ) : QuoteService {
 
-    override suspend fun fetchQuote(): Quote {
-        val request = Request.Builder()
-            .url(quoteHome)
-            .build()
+    override suspend fun fetchQuote(mode: QuoteService.Mode): Quote {
+        val request = buildRequest(url = quoteHome, mode = mode)
 
         val quoteDto = request.send(httpClient) { response ->
             handleResponse<QuoteDto>(response, QuoteDtoType.type)
@@ -56,13 +70,11 @@ class RealQuoteService(
         return Quote(quoteDto)
     }
 
-    override suspend fun fetchWeekQuotes(): List<Quote> {
+    override suspend fun fetchWeekQuotes(mode: QuoteService.Mode): List<Quote> {
 
         val weekQuotesURL: URL = ensureWeekQuotesLink()
 
-        val request = Request.Builder()
-            .url(weekQuotesURL)
-            .build()
+        val request = buildRequest(url = weekQuotesURL, mode = mode)
 
         return request.send(httpClient) { response ->
             handleResponse<QuoteListDto>(response, QuoteListDtoType.type)
@@ -118,6 +130,18 @@ class RealQuoteService(
         val link = weekQuotesLink ?: throw UnresolvedLinkException()
         return link.href.toURL()
     }
+
+    /**
+     * Builds a request.
+     */
+    private fun buildRequest(url: URL, mode: QuoteService.Mode) =
+        with(Request.Builder()) {
+            when(mode) {
+                QuoteService.Mode.FORCE_REMOTE -> cacheControl(CacheControl.FORCE_NETWORK)
+                QuoteService.Mode.FORCE_LOCAL -> cacheControl(CacheControl.FORCE_CACHE)
+                else -> this
+            }
+        }.url(url).build()
 }
 
 /**
@@ -130,6 +154,5 @@ class UnresolvedLinkException(msg: String = "") : Exception(msg)
  * Exception throw when an unexpected response was received from the API.
  */
 class UnexpectedResponseException(
-    val response: Response,
-
+    val response: Response
 ) : Exception("Unexpected ${response.code} response from the API.")
