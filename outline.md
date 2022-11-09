@@ -210,5 +210,21 @@ Lecture video not available (see lecture on the same topics [here](https://www.y
 * A consensual approach to software development
   * [Test Driven Development (introduction)](https://en.wikipedia.org/wiki/Test-driven_development)
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=69zc4ueqiE8&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=10)
 
+## Week 9
+### 07/11/2022
+
+* Practical class dedicated to the development of the course's project
+
+### 11/11/2022 - Building the TicTacToe application _(preview)_
+* Live coding session:
+  * Building the TicTacToe application from scratch, starting with the automated tests
+  * Considerations on software design driven by the need to automated testing
+* State management, continued:
+  * Persistent storage using [shared preferences]((https://developer.android.com/training/data-storage/shared-preferences))
+
+Other links:
+* [Workin with fonts](https://developer.android.com/jetpack/compose/text#fonts)
+
+Lecture video (in Portuguese) _(coming soon)_
