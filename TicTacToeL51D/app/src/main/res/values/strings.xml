@@ -4,4 +4,7 @@
 
     <string name="top_bar_go_back">Go back</string>
     <string name="top_bar_navigate_to_prefs">Display preferences screen</string>
+
+    <string name="preferences_screen_nickname_tip">Your nickname</string>
+    <string name="preferences_screen_moto_tip">Your moto</string>
 </resources>

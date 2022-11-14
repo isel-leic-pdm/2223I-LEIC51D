@@ -4,10 +4,15 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import palbp.laboratory.demos.tictactoe.TicTacToeTestApplication
+import palbp.laboratory.demos.tictactoe.preferences.PreferencesScreenTag
 
 @RunWith(AndroidJUnit4::class)
 class MainActivityTests {
@@ -17,8 +22,8 @@ class MainActivityTests {
 
     @Test
     fun screen_contains_start_button() {
-        testRule.onNodeWithTag("MainScreen").assertExists()
-        testRule.onNodeWithTag("PlayButton").assertExists()
+        testRule.onNodeWithTag(MainScreenTag).assertExists()
+        testRule.onNodeWithTag(PlayButtonTag).assertExists()
     }
 
     @Test
@@ -27,10 +32,37 @@ class MainActivityTests {
         // Arrange not required. Default testing repo always returns a UserInfo instance
 
         // Act
-        testRule.onNodeWithTag("PlayButton").performClick()
+        testRule.onNodeWithTag(PlayButtonTag).performClick()
         testRule.waitForIdle()
 
         // Assert
         testRule.onNodeWithTag("LobbyScreen").assertExists()
     }
+
+    @Test
+    fun pressing_play_navigates_to_preferences_if_user_info_does_not_exist() {
+        // Arrange
+        val testApplication: TicTacToeTestApplication = InstrumentationRegistry
+            .getInstrumentation()
+            .targetContext
+            .applicationContext as TicTacToeTestApplication
+
+        val defaultUserInfoRepo = testApplication.userInfoRepo
+        testApplication.userInfoRepo = mockk {
+            every { userInfo } returns null
+        }
+
+        try {
+            // Act
+            testRule.onNodeWithTag(PlayButtonTag).performClick()
+            testRule.waitForIdle()
+
+            // Assert
+            testRule.onNodeWithTag(PreferencesScreenTag).assertExists()
+        }
+        finally {
+            testApplication.userInfoRepo = defaultUserInfoRepo
+        }
+    }
+
 }

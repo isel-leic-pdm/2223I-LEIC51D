@@ -21,13 +21,16 @@ import androidx.compose.ui.unit.dp
 import palbp.laboratory.demos.tictactoe.R
 import palbp.laboratory.demos.tictactoe.ui.theme.TicTacToeTheme
 
+const val MainScreenTag = "MainScreen"
+const val PlayButtonTag = "PlayButton"
+
 @Composable
-fun MainScreen() {
+fun MainScreen(onStartRequested: () -> Unit) {
     TicTacToeTheme {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .testTag("MainScreen"),
+                .testTag(MainScreenTag),
         ) {
             Column(
                 verticalArrangement = Arrangement.SpaceAround,
@@ -49,8 +52,8 @@ fun MainScreen() {
                 )
 
                 Button(
-                    onClick = { },
-                    modifier = Modifier.testTag("PlayButton")
+                    onClick = onStartRequested,
+                    modifier = Modifier.testTag(PlayButtonTag)
                 ) {
                     Text(
                         text = stringResource(id = R.string.start_game_button_text)
@@ -64,5 +67,5 @@ fun MainScreen() {
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    MainScreen(onStartRequested = { })
 }
