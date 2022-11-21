@@ -222,7 +222,7 @@ Lecture video not available (see lecture on the same topics [here](https://www.y
   * Building the TicTacToe application from scratch, starting with the automated tests
   * Considerations on software design driven by the need to automated testing
 * State management, continued:
-  * Persistent storage using [shared preferences]((https://developer.android.com/training/data-storage/shared-preferences))
+  * Persistent storage using [shared preferences](https://developer.android.com/training/data-storage/shared-preferences)
 
 Other links:
 * [Working with fonts](https://developer.android.com/jetpack/compose/text#fonts)
@@ -269,6 +269,10 @@ Other links:
     * [viewModelScope](https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope), revisited
     * [lifecycleScope](https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope)
     * [repeatOnLifeCycle](https://developer.android.com/topic/libraries/architecture/coroutines#restart)
+
+* State management, continued:
+  * Persistent storage using [Room](https://developer.android.com/training/data-storage/room)
+
 
 Lecture video (in Portuguese) _(coming soon)_
 
