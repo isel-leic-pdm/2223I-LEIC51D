@@ -30,10 +30,20 @@
         </activity>
 
         <activity
+            android:name=".lobby.LobbyActivityReactive"
+            android:exported="false">
+        </activity>
+
+        <activity
             android:name=".preferences.PreferencesActivity"
             android:exported="false"
             android:noHistory="true"
             android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity
+            android:name=".game.GameActivity"
+            android:exported="false">
         </activity>
 
     </application>

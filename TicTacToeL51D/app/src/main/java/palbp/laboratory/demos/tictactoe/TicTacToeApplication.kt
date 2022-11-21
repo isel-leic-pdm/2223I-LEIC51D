@@ -1,6 +1,8 @@
 package palbp.laboratory.demos.tictactoe
 
 import android.app.Application
+import palbp.laboratory.demos.tictactoe.lobby.FakeLobby
+import palbp.laboratory.demos.tictactoe.lobby.Lobby
 import palbp.laboratory.demos.tictactoe.preferences.UserInfoRepository
 import palbp.laboratory.demos.tictactoe.preferences.UserInfoRepositorySharedPrefs
 
@@ -11,6 +13,7 @@ const val TAG = "TicTacToeApp"
  */
 interface DependenciesContainer {
     val userInfoRepo: UserInfoRepository
+    val lobby: Lobby
 }
 
 /**
@@ -20,4 +23,7 @@ class TicTacToeApplication : DependenciesContainer, Application() {
 
     override val userInfoRepo: UserInfoRepository
         get() = UserInfoRepositorySharedPrefs(this)
+
+    override val lobby: Lobby
+        get() = FakeLobby()
 }

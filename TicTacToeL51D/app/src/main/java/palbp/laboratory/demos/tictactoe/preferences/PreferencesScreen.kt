@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import palbp.laboratory.demos.tictactoe.R
 import palbp.laboratory.demos.tictactoe.ui.*
 import palbp.laboratory.demos.tictactoe.ui.theme.TicTacToeTheme
+import kotlin.math.min
 
 const val PreferencesScreenTag = "PreferencesScreen"
 const val NicknameInputTag = "NicknameInput"
@@ -24,8 +25,8 @@ const val MotoInputTag = "MotoInput"
 @Composable
 fun PreferencesScreen(
     userInfo: UserInfo?,
-    onBackRequested: () -> Unit,
-    onSaveRequested: (UserInfo) -> Unit
+    onBackRequested: () -> Unit = { },
+    onSaveRequested: (UserInfo) -> Unit = { }
 ) {
     TicTacToeTheme {
 
@@ -46,9 +47,9 @@ fun PreferencesScreen(
             floatingActionButton = {
                 EditFab(
                     onClick =
-                        if (!editing) { { editing = true } }
-                        else if (enteredInfo == null) null
-                        else { { onSaveRequested(enteredInfo) } },
+                    if (!editing) { { editing = true } }
+                    else if (enteredInfo == null) null
+                    else { { onSaveRequested(enteredInfo) } },
                     mode = if (editing) FabMode.Save else FabMode.Edit
                 )
             }
@@ -61,7 +62,7 @@ fun PreferencesScreen(
                     .fillMaxSize(),
             ) {
                 Text(
-                    text = "How others see you",
+                    text = stringResource(id = R.string.preferences_screen_title),
                     style = MaterialTheme.typography.h5,
                     color = MaterialTheme.colors.primaryVariant
                 )
@@ -69,7 +70,7 @@ fun PreferencesScreen(
 
                 OutlinedTextField(
                     value = displayedNick,
-                    onValueChange = { displayedNick = it },
+                    onValueChange = { displayedNick = ensureInputBounds(it) },
                     singleLine = true,
                     label = {
                         Text(stringResource(id = R.string.preferences_screen_nickname_tip))
@@ -86,7 +87,7 @@ fun PreferencesScreen(
                 )
                 OutlinedTextField(
                     value = displayedMoto,
-                    onValueChange = { displayedMoto = it },
+                    onValueChange = { displayedMoto = ensureInputBounds(it) },
                     maxLines = 3,
                     label = { Text(stringResource(id = R.string.preferences_screen_moto_tip)) },
                     leadingIcon = {
@@ -108,12 +109,17 @@ fun PreferencesScreen(
     }
 }
 
+private const val MAX_INPUT_SIZE = 50
+private fun ensureInputBounds(input: String) =
+    input.trim().also {
+        it.substring(range = 0 until min(it.length, MAX_INPUT_SIZE))
+    }
+
 @Preview(showBackground = true)
 @Composable
 private fun PreferencesScreenViewModePreview() {
     PreferencesScreen(
         userInfo = UserInfo("my nick", "my moto"),
-        onBackRequested = { },
         onSaveRequested = { }
     )
 }
@@ -123,7 +129,6 @@ private fun PreferencesScreenViewModePreview() {
 private fun PreferencesScreenEditModePreview() {
     PreferencesScreen(
         userInfo = null,
-        onBackRequested = { },
         onSaveRequested = { }
     )
 }

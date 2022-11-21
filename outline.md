@@ -235,9 +235,9 @@ Other links:
   * Building the TicTacToe application from scratch, starting with the automated tests
   * Considerations on software design driven by the need to automated testing
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=rUa-ZMKpbmk&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=12)
 
-### 18/11/2022 - Android application design, continued _(preview)_
+### 18/11/2022 - Android application design, continued
 * Considerations on the design of Android applications
 * Interaction models: 
   * Pull based using suspending functions (as we've been doing so far)
@@ -254,13 +254,22 @@ Lecture video (in Portuguese) _(coming soon)_
     * [lifecycleScope](https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope)
     * [repeatOnLifeCycle](https://developer.android.com/topic/libraries/architecture/coroutines#restart)
 
-* Materialization of the discussed subjects on the TicTacToe application
-  * Implementing the game's lobby: part 1
-
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=HmlAS7V57ZE&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=13)
 
 Other links: 
 * [Testing Kotlin flows on Android](https://developer.android.com/kotlin/flow/test)
 * [Recomendations for Android architecture](https://developer.android.com/topic/architecture/recommendations)
+
+
+## Week 11
+### 21/11/2022 - Android application design: Interaction models, continued
+
+* Lifecycle and lifecycle owners
+  * Reacting to lifecycle changes implicitely, by using coroutines' scopes:
+    * [viewModelScope](https://developer.android.com/topic/libraries/architecture/coroutines#viewmodelscope), revisited
+    * [lifecycleScope](https://developer.android.com/topic/libraries/architecture/coroutines#lifecyclescope)
+    * [repeatOnLifeCycle](https://developer.android.com/topic/libraries/architecture/coroutines#restart)
+
+Lecture video (in Portuguese) _(coming soon)_
 
 
