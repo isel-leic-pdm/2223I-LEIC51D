@@ -200,7 +200,7 @@ Lecture video not available (see lecture on the same topics [here](https://www.y
 
 * Practical class dedicated to the development of the course's project
 
-### 04/11/2022 - Automatic tests in Android, revisited _(preview)_
+### 04/11/2022 - Automatic tests in Android, revisited
 
 * Building automated tests in Android, revisited
   * Testing domain artifacts with JUnit tests
@@ -273,7 +273,30 @@ Other links:
 * State management, continued:
   * Persistent storage using [Room](https://developer.android.com/training/data-storage/room)
 
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=J-ryzx2SGqY&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=14)
+
+### 25/11/2022 - Building the TicTacToe application: part 3
+
+Live coding session:
+  * Building the TicTacToe application from scratch, starting with the automated tests
+  * Considerations on software design driven by the need to automated testing
+
+* Persistency using Firebase's Firestore:
+  * Overview of the provided data model (i.e. Document DB)
+    * [Documents, collections and references](https://firebase.google.com/docs/firestore/data-model)
+    * [Data types](https://firebase.google.com/docs/firestore/manage-data/data-types)
+  * Android SDK API overview:
+    * [Adding, updating](https://firebase.google.com/docs/firestore/manage-data/add-data) and [deleting](https://firebase.google.com/docs/firestore/manage-data/delete-data) data
+    * Reading data
+      * [Queries](https://firebase.google.com/docs/firestore/query-data/get-data) and [observable queries](https://firebase.google.com/docs/firestore/query-data/listen)
+
+* Materialization of the discussed subjects on the TicTacToe application:
+  * Implementing the game's lobby using firestore
+
+* Other links:
+  * [Adding Firebase to an Android project](https://firebase.google.com/docs/android/setup?hl=en&authuser=0)
+  * [Getting started with Firebase emulator](https://firebase.google.com/docs/emulator-suite/connect_and_prototype?database=Firestore)
+  * [Connecting the app to the Firebase emulator](https://firebase.google.com/docs/emulator-suite/connect_firestore)
 
 Lecture video (in Portuguese) _(coming soon)_
-
 
