@@ -25,12 +25,10 @@ const val MainScreenTag = "MainScreen"
 const val PlayButtonTag = "PlayButton"
 
 @Composable
-fun MainScreen(onStartRequested: () -> Unit) {
+fun MainScreen(onStartRequested: () -> Unit = { }) {
     TicTacToeTheme {
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag(MainScreenTag),
+            modifier = Modifier.fillMaxSize().testTag(MainScreenTag),
         ) {
             Column(
                 verticalArrangement = Arrangement.SpaceAround,
@@ -67,5 +65,5 @@ fun MainScreen(onStartRequested: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen(onStartRequested = { })
+    MainScreen()
 }

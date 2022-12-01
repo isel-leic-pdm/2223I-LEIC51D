@@ -1,31 +1,31 @@
-package palbp.laboratory.demos.tictactoe.lobby
+package palbp.laboratory.demos.tictactoe.game.lobby.ui
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import palbp.laboratory.demos.tictactoe.DependenciesContainer
-import palbp.laboratory.demos.tictactoe.TAG
-import palbp.laboratory.demos.tictactoe.game.GameActivity
-import palbp.laboratory.demos.tictactoe.preferences.PreferencesActivity
+import palbp.laboratory.demos.tictactoe.game.play.ui.GameActivity
+import palbp.laboratory.demos.tictactoe.preferences.ui.PreferencesActivity
 import palbp.laboratory.demos.tictactoe.utils.viewModelInit
 
 /**
  * The screen used to display the list of players in the lobby, that is, available to play.
+ * This a reactive version of this screen. An alternative approach is used in
+ * [LobbyActivityReactive].
  */
 class LobbyActivity : ComponentActivity() {
 
     private val viewModel by viewModels<LobbyScreenViewModel> {
         viewModelInit {
-            val lobby = (application as DependenciesContainer).lobby
-            LobbyScreenViewModel(lobby)
+            val app = (application as DependenciesContainer)
+            LobbyScreenViewModel(app.lobby, app.userInfoRepo)
         }
     }
 
@@ -40,15 +40,18 @@ class LobbyActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            val players = viewModel.players.collectAsState()
+            val players by viewModel.players.collectAsState()
             LobbyScreen(
-                state = LobbyScreenState(players.value),
+                state = LobbyScreenState(players),
+                onPlayerSelected = {
+                    GameActivity.navigate(this)
+                },
                 onBackRequested = { finish() },
                 onPreferencesRequested = {
                     PreferencesActivity.navigate(this, finishOnSave = true)
-                },
-                onPlayerSelected = { GameActivity.navigate(this) }
+                }
             )
         }
 

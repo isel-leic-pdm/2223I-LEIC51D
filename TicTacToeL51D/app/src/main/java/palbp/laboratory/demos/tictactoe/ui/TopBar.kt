@@ -5,8 +5,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -20,7 +19,7 @@ import palbp.laboratory.demos.tictactoe.ui.theme.TicTacToeTheme
  */
 data class NavigationHandlers(
     val onBackRequested: (() -> Unit)? = null,
-    val onPreferencesRequested: (() -> Unit)? = null
+    val onPreferencesRequested: (() -> Unit)? = null,
 )
 
 // Test tags for the TopBar navigation elements
@@ -74,10 +73,7 @@ private fun TopBarPreviewBack() {
 private fun TopBarPreviewBackAndPrefs() {
     TicTacToeTheme {
         TopBar(
-            NavigationHandlers(
-                onBackRequested = { },
-                onPreferencesRequested = { }
-            )
+            NavigationHandlers(onBackRequested = { }, onPreferencesRequested = { })
         )
     }
 }

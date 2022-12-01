@@ -291,12 +291,21 @@ Live coding session:
       * [Queries](https://firebase.google.com/docs/firestore/query-data/get-data) and [observable queries](https://firebase.google.com/docs/firestore/query-data/listen)
 
 * Materialization of the discussed subjects on the TicTacToe application:
-  * Implementing the game's lobby using firestore
+  * Implementing the game's lobby using Firestore
 
 * Other links:
   * [Adding Firebase to an Android project](https://firebase.google.com/docs/android/setup?hl=en&authuser=0)
   * [Getting started with Firebase emulator](https://firebase.google.com/docs/emulator-suite/connect_and_prototype?database=Firestore)
   * [Connecting the app to the Firebase emulator](https://firebase.google.com/docs/emulator-suite/connect_firestore)
+
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=oiWa8dFke4I&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=15)
+
+## Week 12
+### 02/12/2022 - Building the TicTacToe application: part 4 _(preview)_
+
+Live coding session:
+  * Building the TicTacToe application from scratch, starting with the automated tests
+  * Implementing the game's lobby using Firestore, continued
 
 Lecture video (in Portuguese) _(coming soon)_
 

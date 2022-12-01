@@ -12,6 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import palbp.laboratory.demos.tictactoe.TicTacToeTestApplication
+import palbp.laboratory.demos.tictactoe.game.lobby.ui.LobbyScreenTag
 import palbp.laboratory.demos.tictactoe.preferences.PreferencesScreenTag
 
 @RunWith(AndroidJUnit4::class)
@@ -36,11 +37,12 @@ class MainActivityTests {
         testRule.waitForIdle()
 
         // Assert
-        testRule.onNodeWithTag("LobbyScreen").assertExists()
+        testRule.onNodeWithTag(LobbyScreenTag).assertExists()
     }
 
     @Test
     fun pressing_play_navigates_to_preferences_if_user_info_does_not_exist() {
+
         // Arrange
         val testApplication: TicTacToeTestApplication = InstrumentationRegistry
             .getInstrumentation()
@@ -64,5 +66,4 @@ class MainActivityTests {
             testApplication.userInfoRepo = defaultUserInfoRepo
         }
     }
-
 }

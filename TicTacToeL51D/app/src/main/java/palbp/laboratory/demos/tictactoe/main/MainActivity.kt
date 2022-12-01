@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import palbp.laboratory.demos.tictactoe.DependenciesContainer
-import palbp.laboratory.demos.tictactoe.lobby.LobbyActivity
-import palbp.laboratory.demos.tictactoe.lobby.LobbyActivityReactive
-import palbp.laboratory.demos.tictactoe.preferences.PreferencesActivity
+import palbp.laboratory.demos.tictactoe.game.lobby.ui.LobbyActivity
+import palbp.laboratory.demos.tictactoe.preferences.ui.PreferencesActivity
 
+/**
+ * The start screen.
+ */
 class MainActivity : ComponentActivity() {
 
     private val repo by lazy {
@@ -23,7 +25,6 @@ class MainActivity : ComponentActivity() {
 
     private fun startGame() {
         if (repo.userInfo != null)
-//            LobbyActivityReactive.navigate(this)
             LobbyActivity.navigate(this)
         else
             PreferencesActivity.navigate(this)

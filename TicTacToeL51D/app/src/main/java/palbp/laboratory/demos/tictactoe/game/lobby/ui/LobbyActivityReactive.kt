@@ -1,4 +1,4 @@
-package palbp.laboratory.demos.tictactoe.lobby
+package palbp.laboratory.demos.tictactoe.game.lobby.ui
 
 import android.content.Context
 import android.content.Intent
@@ -13,9 +13,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
 import palbp.laboratory.demos.tictactoe.DependenciesContainer
 import palbp.laboratory.demos.tictactoe.TAG
-import palbp.laboratory.demos.tictactoe.game.GameActivity
-import palbp.laboratory.demos.tictactoe.preferences.PreferencesActivity
-import palbp.laboratory.demos.tictactoe.preferences.UserInfo
+import palbp.laboratory.demos.tictactoe.game.lobby.model.Lobby
+import palbp.laboratory.demos.tictactoe.game.lobby.model.PlayerInfo
+import palbp.laboratory.demos.tictactoe.game.play.ui.GameActivity
+import palbp.laboratory.demos.tictactoe.preferences.model.UserInfo
+import palbp.laboratory.demos.tictactoe.preferences.ui.PreferencesActivity
 
 /**
  * The screen used to display the list of players in the lobby, that is, available to play.
@@ -26,6 +28,11 @@ class LobbyActivityReactive : ComponentActivity() {
 
     private val lobby: Lobby by lazy {
         (application as DependenciesContainer).lobby
+    }
+
+    private val localUser: UserInfo by lazy {
+        val localUserInfo = (application as DependenciesContainer).userInfoRepo.userInfo
+        checkNotNull(localUserInfo)
     }
 
     companion object {
@@ -39,15 +46,16 @@ class LobbyActivityReactive : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.v(TAG, "LobbyActivityReactive.onCreate() ")
         lifecycleScope.launch {
+            Log.v(TAG, "before repeatOnLifeCycle")
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                lobby.players.collect {
+                lobby.enterAndObserve(PlayerInfo(localUser)).collect {
                     setContent {
                         LobbyScreenContent(it)
                     }
                 }
             }
+            Log.v(TAG, "After repeatOnLifeCycle")
         }
 
         setContent {
@@ -56,7 +64,7 @@ class LobbyActivityReactive : ComponentActivity() {
     }
 
     @Composable
-    private fun LobbyScreenContent(players: List<UserInfo> = emptyList()) {
+    private fun LobbyScreenContent(players: List<PlayerInfo> = emptyList()) {
         LobbyScreen(
             state = LobbyScreenState(players),
             onPlayerSelected = {

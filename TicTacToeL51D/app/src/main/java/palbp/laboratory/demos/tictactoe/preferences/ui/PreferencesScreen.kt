@@ -14,6 +14,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import palbp.laboratory.demos.tictactoe.R
+import palbp.laboratory.demos.tictactoe.preferences.model.UserInfo
+import palbp.laboratory.demos.tictactoe.preferences.model.userInfoOrNull
 import palbp.laboratory.demos.tictactoe.ui.*
 import palbp.laboratory.demos.tictactoe.ui.theme.TicTacToeTheme
 import kotlin.math.min
@@ -35,8 +37,8 @@ fun PreferencesScreen(
         var editing by remember { mutableStateOf(userInfo == null) }
 
         val enteredInfo = userInfoOrNull(
-            nick = displayedNick,
-            moto = displayedMoto.ifBlank { null }
+            nick = displayedNick.trim(),
+            moto = displayedMoto.trim().ifBlank { null }
         )
 
         Scaffold(
@@ -47,9 +49,9 @@ fun PreferencesScreen(
             floatingActionButton = {
                 EditFab(
                     onClick =
-                    if (!editing) { { editing = true } }
-                    else if (enteredInfo == null) null
-                    else { { onSaveRequested(enteredInfo) } },
+                        if (!editing) { { editing = true } }
+                        else if (enteredInfo == null) null
+                        else { { onSaveRequested(enteredInfo) } },
                     mode = if (editing) FabMode.Save else FabMode.Edit
                 )
             }
@@ -111,7 +113,7 @@ fun PreferencesScreen(
 
 private const val MAX_INPUT_SIZE = 50
 private fun ensureInputBounds(input: String) =
-    input.trim().also {
+    input.also {
         it.substring(range = 0 until min(it.length, MAX_INPUT_SIZE))
     }
 
