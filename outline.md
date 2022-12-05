@@ -277,10 +277,10 @@ Other links:
 
 ### 25/11/2022 - Building the TicTacToe application: part 3
 
-Live coding session:
+* Live coding session:
   * Building the TicTacToe application from scratch, starting with the automated tests
   * Considerations on software design driven by the need to automated testing
-
+  
 * Persistency using Firebase's Firestore:
   * Overview of the provided data model (i.e. Document DB)
     * [Documents, collections and references](https://firebase.google.com/docs/firestore/data-model)
@@ -301,11 +301,27 @@ Live coding session:
 [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=oiWa8dFke4I&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=15)
 
 ## Week 12
-### 02/12/2022 - Building the TicTacToe application: part 4 _(preview)_
+### 02/12/2022 - Building the TicTacToe application: part 4
 
 Live coding session:
   * Building the TicTacToe application from scratch, starting with the automated tests
   * Implementing the game's lobby using Firestore, continued
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=9e1Yp3LYupU&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=16)
 
+## Week 13
+### 05/12/2022 - Building the TicTacToe application: part 5 _(preview)_
+
+Live coding session:
+  * Building the TicTacToe application from scratch, starting with the automated tests
+  * Further considerations on software design driven by the need to automated testing
+  * Finishing up game's lobby using Firestore, continued
+    * Adding support for being challenged and challenging other players
+  * Starting the implementation of the game screen
+    * Domain layer and tests
+    * Screen UI
+
+Other links:
+  * [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+
+Lecture video (in Portuguese) _(coming soon)_
