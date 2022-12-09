@@ -53,9 +53,10 @@ class QuoteActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.v(TAG, "QuoteActivity.onCreate()")
-        setContent {
-            val receivedExtra = quoteExtra
-            if (receivedExtra != null) {
+
+        val receivedExtra = quoteExtra
+        if (receivedExtra != null) {
+            setContent {
                 QuoteScreen(
                     state = QuoteScreenState(Quote(receivedExtra), RefreshingState.Idle),
                     onNavigationRequested = NavigationHandlers(
@@ -64,10 +65,12 @@ class QuoteActivity : ComponentActivity() {
                     )
                 )
             }
-            else {
-                if (viewModel.quote == null)
-                    viewModel.fetchQuote()
+        }
+        else {
+            if (viewModel.quote == null)
+                viewModel.fetchQuote()
 
+            setContent {
                 val loadingState: RefreshingState =
                     if (viewModel.isLoading) RefreshingState.Refreshing
                     else RefreshingState.Idle
