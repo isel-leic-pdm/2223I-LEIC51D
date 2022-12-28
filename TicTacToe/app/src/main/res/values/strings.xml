@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Tic Tac Toe</string>
+    <string name="start_game_button_text">Play</string>
+
+    <string name="top_bar_go_back">Go back</string>
+    <string name="top_bar_navigate_to_prefs">Display preferences screen</string>
+
+    <string name="preferences_screen_title">How others see you</string>
+    <string name="preferences_screen_nickname_tip">Your nickname</string>
+    <string name="preferences_screen_moto_tip">Your moto</string>
+
+    <string name="lobby_screen_title">Available players</string>
+
+    <string name="starting_match_dialog_title">Match is starting</string>
+    <string name="starting_match_dialog_text">Waiting for opponent to join</string>
+    <string name="starting_match_cancel_button">Cancel</string>
+
+    <string name="match_ended_dialog_title">Match ended</string>
+    <string name="match_ended_dialog_text_local_won">Congratulations, you won!</string>
+    <string name="match_ended_dialog_text_opponent_won">Your opponent has won.</string>
+    <string name="match_ended_dialog_text_tied_match">The match is tied</string>
+    <string name="match_ended_ok_button">OK</string>
+
+    <string name="game_screen_waiting">Joining match</string>
+    <string name="game_screen_your_turn">It\'s your turn</string>
+    <string name="game_screen_opponent_turn">Opponent\'s turn</string>
+    <string name="game_screen_forfeit">Forfeit</string>
+</resources>
