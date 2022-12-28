@@ -310,7 +310,7 @@ Live coding session:
 [Lecture video (in Portuguese)](https://www.youtube.com/watch?v=9e1Yp3LYupU&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=16)
 
 ## Week 13
-### 05/12/2022 - Building the TicTacToe application: part 5 _(preview)_
+### 05/12/2022 - Building the TicTacToe application: part 5
 
 Live coding session:
   * Building the TicTacToe application from scratch, starting with the automated tests
@@ -325,3 +325,20 @@ Other links:
   * [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 Lecture video (in Portuguese) _(coming soon)_
+
+### 09/12/2022 - Building the TicTacToe application: finishing up
+
+Live coding session:
+  * Building the TicTacToe application from scratch, starting with the automated tests
+  * Finishing up the implementation of the game screen
+
+Lecture video (in Portuguese) _(coming soon)_
+
+## Week 14
+### 12/12/2022
+
+* Practical class dedicated to the development of the course's project
+
+### 16/12/2022
+
+* Practical class dedicated to the development of the course's project
