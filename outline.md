@@ -324,7 +324,7 @@ Live coding session:
 Other links:
   * [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=GuFnrHKW9Is&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=17)
 
 ### 09/12/2022 - Building the TicTacToe application: finishing up
 
@@ -332,7 +332,7 @@ Live coding session:
   * Building the TicTacToe application from scratch, starting with the automated tests
   * Finishing up the implementation of the game screen
 
-Lecture video (in Portuguese) _(coming soon)_
+[Lecture video (in Portuguese)](https://www.youtube.com/watch?v=PN4DlUtuFq4&list=PL8XxoCaL3dBjFUlNRZrI0LdlfW0ciaH4n&index=18)
 
 ## Week 14
 ### 12/12/2022
